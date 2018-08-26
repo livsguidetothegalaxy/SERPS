@@ -163,7 +163,7 @@ if dist_z_plot < [3] and dist_z_plot > [-3]:
    thesun, = plt.plot(0,0, "x", color = "yellow", markersize = 2)
    allpulsars, = plt.plot(dist_x_plot2, dist_z_plot, '*', color = 'red', markersize =3 )
    yourpulsar = "%s"%j
-   plt.legend([theholes, onesunnyboi, another, thatpulsar], ["Galactic Center", "The Sun", "Other Pulsars", yourpulsar])
+   plt.legend([galcenter, thesun, another, allpulsars], ["Galactic Center", "The Sun", "Other Pulsars", yourpulsar])
    name = "%sxzzoom2.png"%j
    plt.savefig(name)
     
