@@ -4,12 +4,22 @@ import matplotlib.pyplot as plt
 import subprocess as sb
 import shlex 
 
+#code for distance to your pulsar, as well as plots for the xy and xz distances
 
+#To loop through all pulsars
+#with open("JName", "r") as myfile:
+     #name = myfile.readlines()
+     #names = [x.rstrip() for x in name]
+     #for name in names:
+         # j = name
+         # print j
 
 j = raw_input( "Please enter J name of your pulsar.") 
 #gives the distance to the pulsar 
 
 from math import sqrt 
+
+#finds values for x,y, and z values from PSRCat for each pulsar, splits each value into a list, and then strips any whitespace from the list.
 
 distx= 'psrcat -nohead -nonumber -o short -c "XX" %s' %j
 distx_list = shlex.split(distx)
@@ -88,12 +98,12 @@ for i in xrange(len(x_dist)):
     if x_dist[i].strip()!= "," and y_dist[i].strip()!=",":
        x_dist_plot2.append(float(x_dist[i]))
        z_dist_plot.append(float(z_dist[i])) 
-
+#plots xy values
 fig = plt.figure()
 fig.suptitle('XY Distance Plot')
 plt.xlabel('kpc in the x direction')
 plt.ylabel('kpc in the y direction')
-others, plt.plot(x_dist_plot, y_dist_plot, '.', color = "blue", markersize = 1)
+others, = plt.plot(x_dist_plot, y_dist_plot, '.', color = "blue", markersize = 1)
 blackhole, = plt.plot(0,0, 'o', color = "black", markersize = 5)
 sun, = plt.plot(0,8, "x", color = "yellow", markersize = 3)
 pulsars, = plt.plot(dist_x_plot, dist_y_plot, '*', color = "red", markersize = 3)
@@ -105,6 +115,7 @@ plt.minorticks_on()
 name = "%sxy.png" %j
 plt.savefig(name)
 
+# plots xy values
 fig = plt.figure()
 fig.suptitle('XZ Distance Plot')
 plt.xlabel('kpc in the x direction')
@@ -119,7 +130,7 @@ name = "%sxz.png"%j
 plt.savefig(name)
 
 
-print dist_z_plot
+#plots values for pulsars within 10 kpc from earth
 if  dist_z_plot < [10] and dist_z_plot > [-10]:
    fig = plt.figure()
    x1, x2, z1, z2 = -10, 10, -10, 10
@@ -137,6 +148,8 @@ if  dist_z_plot < [10] and dist_z_plot > [-10]:
    name = "%sxzzoom.png" %j
    plt.savefig(name)
 
+#plots values for pulsars within 3kpc from the sun 
+
 if dist_z_plot < [3] and dist_z_plot > [-3]:
    fig = plt.figure()
    x1, x2, z1, z2 = -3, 3, -3, 3
@@ -146,16 +159,16 @@ if dist_z_plot < [3] and dist_z_plot > [-3]:
    plt.xlabel('kpc in the x direction')
    plt.ylabel('kpc in the z direction')
    another, = plt.plot(x_dist_plot2, z_dist_plot, '.', color = "blue", markersize = 1)
-   theholes,= plt.plot(0,0, "o", color = 'Black', markersize = 4)
-   onesunnyboi, = plt.plot(0,0, "x", color = "yellow", markersize = 2)
-   thatpulsar, = plt.plot(dist_x_plot2, dist_z_plot, '*', color = 'red', markersize =3 )
+   galcenter,= plt.plot(0,0, "o", color = 'Black', markersize = 4)
+   thesun, = plt.plot(0,0, "x", color = "yellow", markersize = 2)
+   allpulsars, = plt.plot(dist_x_plot2, dist_z_plot, '*', color = 'red', markersize =3 )
    yourpulsar = "%s"%j
    plt.legend([theholes, onesunnyboi, another, thatpulsar], ["Galactic Center", "The Sun", "Other Pulsars", yourpulsar])
    name = "%sxzzoom2.png"%j
    plt.savefig(name)
     
 
-
+#gives distance from the sun to pulsar
 
 x1 = (float(x))
 y1 = (float(y))

@@ -7,6 +7,19 @@ import shlex
 #This section will plot binary periods vs. minmass
 
 #Following lines take the enteries for the binary periods and minimum companion mass from the PSRCat, split the lines into a list, and then strips any blank space away so each componant can be used as a varible in the plot.
+
+
+#For code to loop through all pulsars
+#with open("JName", "r") as myfile:
+    #name = myfile.readlines()
+    #names =[x.rstrip() for x in name]
+    #for name in names:
+         #j=name
+         # print j
+
+
+
+
 bperiod_cmd = 'psrcat -nohead -nonumber -o short -c "PB"'
 bperiod_cmd_list = shlex.split(bperiod_cmd)
 bp = sb.Popen(bperiod_cmd_list, stdout=sb.PIPE)
@@ -56,20 +69,20 @@ for i in xrange(len(pulsar_bperiod)):
           pulsarmassofsystem_plot.append(float(pulsar_massofsystem[i]))          
 
 #plots and lables information 
-fig = plt.figure()
-fig.suptitle('Binary period vs MinMass')
-plt.xlabel('log(Pb)- binary period(Days)')
-plt.ylabel('log(MinMass)-MinMass (solar masses)')
-plt.ticklabel_format(style='sci', axis ='x', scilimits=(0,0))
-plt.ticklabel_format(style='sci', axis= 'y', scilimits=(0,0))
-others, = plt.plot(np.log10(bperiod_plot), np.log10(mass_of_system_plot), 'o', color = 'blue', markersize = 3)
-pulsar, = plt.plot(np.log10(pulsarbperiod_plot), np.log10(pulsarmassofsystem_plot), '*', color = 'red', markersize = 5)
-yourpulsar= "%s" %j 
-plt.legend([others, pulsar],["Other binary pulsars", yourpulsar])
-plt.minorticks_on()
+          fig = plt.figure()
+          fig.suptitle('Binary period vs MinMass')
+          plt.xlabel('log(Pb)- binary period(Days)')
+          plt.ylabel('log(MinMass)-MinMass (solar masses)')
+          plt.ticklabel_format(style='sci', axis ='x', scilimits=(0,0))
+          plt.ticklabel_format(style='sci', axis= 'y', scilimits=(0,0))
+          others, = plt.plot(np.log10(bperiod_plot), np.log10(mass_of_system_plot), 'o', color = 'blue', markersize = 3)
+          pulsar, = plt.plot(np.log10(pulsarbperiod_plot), np.log10(pulsarmassofsystem_plot), '*', color = 'red', markersize = 5)
+          yourpulsar= "%s" %j 
+          plt.legend([others, pulsar],["Other binary pulsars", yourpulsar])
+          plt.minorticks_on()
 
-name = '%sbinary.png' %j
-plt.savefig(name)
+          name = '%sbinary.png' %j
+          plt.savefig(name)
 
 
     
