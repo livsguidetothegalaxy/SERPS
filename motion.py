@@ -35,8 +35,8 @@ pml = []
 
 for i in xrange(len(allb)):
     if allb[i].strip()!='*' and alll[i].strip()!='*':
-       pmb.append(float(allb[0]))
-       pml.append(float(alll[0]))
+       pmb.append(float(allb[i]))
+       pml.append(float(alll[i]))
 
 yourpl = "psrcat -nohead -nonumber -o short -c 'PML' %s" %j
 yp_l = shlex.split(yourpl)
