@@ -66,7 +66,7 @@ if p > 0 and pdot > 0:
     pulsarperioddir_plot.append(float(pulsar_perioddir[i]))
  
 fig, ax = plt.subplots(1,1)
-fig.suptitle('Pulsar Period vs Period Derivative(p vs pdot)')
+fig.suptitle('Period Derivative vs Pulsar Period (pdot vs p)')
 plt.xlabel('period (s)', fontsize =16)
 plt.ylabel('period derivative (s/s)', fontsize=16)
 otherspulsars, = plt.plot(periods_plot , np.log10(period_derivs_plot), 'o', color = 'blue', markersize =1)
